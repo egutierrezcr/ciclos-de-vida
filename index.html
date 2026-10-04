@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ciclos de vida, la biología en movimiento</title>
+<meta name="description" content="Animaciones 3D interactivas que muestran cómo cambia un ser vivo a lo largo de su ciclo de vida, día a día. Empezamos con la mariposa monarca.">
+<style>
+:root{
+  --bg:#f3f6ee; --bg2:#e2ebd9; --card:#fbfdf8; --ink:#1d3327; --ink2:#4c6656; --line:rgba(29,51,39,.16);
+  --accent:#df6d14; --accent-ink:#ffffff; --shadow:0 10px 30px rgba(20,40,25,.10);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13241c; --bg2:#0d1a14; --card:#1a2f25; --ink:#e7efe2; --ink2:#a9bfae; --line:rgba(231,239,226,.16);
+    --accent:#f08a3c; --accent-ink:#1a1208; --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13241c; --bg2:#0d1a14; --card:#1a2f25; --ink:#e7efe2; --ink2:#a9bfae; --line:rgba(231,239,226,.16);
+  --accent:#f08a3c; --accent-ink:#1a1208; --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;color:var(--ink);
+  font-family:"Trebuchet MS","Lucida Grande","Segoe UI",sans-serif;line-height:1.55;
+  background:radial-gradient(120% 90% at 20% 0%,var(--bg) 0%,var(--bg2) 100%) fixed;
+}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.brand{font-weight:700;letter-spacing:.2px}
+#theme{
+  font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);
+  border-radius:999px;padding:8px 14px;font-size:14px;cursor:pointer
+}
+#theme:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.hero{padding:44px 0 28px}
+.hero h1{font-size:clamp(32px,6vw,54px);line-height:1.08;margin:0 0 14px;letter-spacing:-.5px;max-width:16ch}
+.hero p{font-size:clamp(16px,2.2vw,19px);color:var(--ink2);max-width:58ch;margin:0}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:30px 0 8px}
+.how div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:15px}
+.how b{display:block;margin-bottom:2px}
+h2{font-size:24px;margin:40px 0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.card{
+  display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;box-shadow:var(--shadow);text-decoration:none;color:inherit;
+  transition:transform .18s ease
+}
+a.card:hover{transform:translateY(-3px)}
+.card img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;background:var(--bg2)}
+.card .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card h3{margin:0;font-size:20px}
+.card .sci{margin:0;font-style:italic;font-size:14px;color:var(--ink2)}
+.card .desc{margin:4px 0 10px;font-size:15px}
+.tag{align-self:flex-start;font-size:12.5px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink2)}
+.cta{margin-top:auto;align-self:flex-start;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:15px;padding:9px 16px;border-radius:10px}
+.card.soon{border-style:dashed;box-shadow:none;justify-content:center;min-height:220px;text-align:center}
+.card.soon .body{align-items:center;justify-content:center}
+.card.soon p{margin:0;color:var(--ink2);font-size:15px;max-width:30ch}
+footer{margin:56px 0 36px;padding-top:18px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink2)}
+footer a{color:inherit}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="brand">Ciclos de vida</span>
+    <button id="theme" type="button" aria-label="Cambiar entre tema claro y oscuro">Tema</button>
+  </header>
+
+  <section class="hero">
+    <h1>La biología, vista día a día</h1>
+    <p>Animaciones 3D que podés mover con el dedo o el ratón: un ser vivo, su ciclo completo y qué pasa en cada etapa. Con los tamaños a escala real y las duraciones medidas, no inventadas.</p>
+    <div class="how">
+      <div><b>1. Elegí una especie</b>Cada una tiene su propia animación.</div>
+      <div><b>2. Mové la línea de tiempo</b>Saltá al día que quieras o dejalo correr.</div>
+      <div><b>3. Mirá de cerca</b>Girá, acercate y leé qué ocurre en esa etapa.</div>
+    </div>
+  </section>
+
+  <section aria-labelledby="especies">
+    <h2 id="especies">Especies</h2>
+    <div class="grid">
+      <a class="card" href="monarca/">
+        <img src="assets/monarca.webp" alt="Oruga de mariposa monarca sobre una hoja de algodoncillo, en la animación 3D" width="720" height="450" loading="lazy">
+        <div class="body">
+          <h3>Mariposa monarca</h3>
+          <p class="sci">Danaus plexippus</p>
+          <p class="desc">Del huevo al adulto sobre el algodoncillo: unos 30 días de metamorfosis a 25 °C.</p>
+          <span class="tag">Ciclo de unos 30 días</span>
+          <span class="cta">Ver la animación</span>
+        </div>
+      </a>
+      <div class="card soon">
+        <div class="body">
+          <h3>Más especies</h3>
+          <p>Esta colección va a crecer. Cada especie nueva se suma como una animación más, sin tocar las demás.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Hecho con <a href="https://threejs.org">three.js</a>. Los datos de cada especie se citan en su propia página.
+  </footer>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById("theme");
+  var KEY="ciclos-tema";
+  function systemDark(){return matchMedia("(prefers-color-scheme: dark)").matches}
+  function current(){
+    var t=root.getAttribute("data-theme");
+    return t?t:(systemDark()?"dark":"light");
+  }
+  function label(){btn.textContent=current()==="dark"?"Tema claro":"Tema oscuro"}
+  try{var saved=localStorage.getItem(KEY);if(saved==="light"||saved==="dark")root.setAttribute("data-theme",saved)}catch(e){}
+  label();
+  btn.addEventListener("click",function(){
+    var next=current()==="dark"?"light":"dark";
+    root.setAttribute("data-theme",next);
+    try{localStorage.setItem(KEY,next)}catch(e){}
+    label();
+  });
+})();
+</script>
+</body>
+</html>
